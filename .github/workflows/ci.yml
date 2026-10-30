@@ -1,0 +1,23 @@
+name: MATLAB
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up MATLAB
+        uses: matlab-actions/setup-matlab@v3
+        with:
+          release: latest
+
+      - name: Run MATLAB tests
+        uses: matlab-actions/run-tests@v3
+        with:
+          source-folder: src
