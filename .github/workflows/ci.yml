@@ -21,3 +21,12 @@ jobs:
         uses: matlab-actions/run-tests@v3
         with:
           source-folder: src
+          test-results-junit: test-results/results.xml
+          code-coverage-cobertura: code-coverage/coverage.xml
+
+      - name: Write job summary
+        if: always()
+        run: >-
+          python3 .github/scripts/job_summary.py
+          test-results/results.xml code-coverage/coverage.xml
+          >> "$GITHUB_STEP_SUMMARY"
